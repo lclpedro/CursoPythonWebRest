@@ -1,0 +1,28 @@
+{
+  "name": "curso_python_web",
+  "version": "1.0.0",
+  "description": "Curso de Python Web utilizando metodologia REST.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lclpedro/CursoPythonWebRest.git"
+  },
+  "author": "Pedro Lucas Lima",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lclpedro/CursoPythonWebRest/issues"
+  },
+  "homepage": "https://github.com/lclpedro/CursoPythonWebRest#readme",
+  "devDependencies": {
+    "express": "^4.16.3",
+    "nodemon": "^1.17.2"
+  },
+  "dependencies": {
+    "angular": "^1.6.9",
+    "materialize-css": "^1.0.0-beta",
+    "sweetalert": "^2.1.0"
+  }
+}
