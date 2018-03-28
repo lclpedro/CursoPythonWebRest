@@ -33,7 +33,8 @@
               </button>
             </form>
             <div class="col s12">
-              <table>
+              <h5 ng-show="!list_contacts">Ainda não existem contatos cadastrados.</h5>
+              <table ng-hide="!list_contacts">
                 <thead>
                   <tr>
                     <th class="center-align">Nome</th>
