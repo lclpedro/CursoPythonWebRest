@@ -53,7 +53,7 @@ $scope.delete_contact=(data)=>{
         title: "Você quer mesmo excluir?",
         text: `Se você confirmar, o contato de ${data.name_person} será excluido da sua lista de contatos.`,
         icon: "warning",
-        buttons: true,
+        buttons: ["Cancelar", "Salvar"],
         dangerMode: true,
     })
     .then((willDelete) => {
