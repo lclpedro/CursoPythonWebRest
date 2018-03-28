@@ -23,6 +23,10 @@ function initConfig($scope, $http){
               icon: "success",
               button: "Fechar",
           })
+        }).catch(erro=>{
+            swal(`Ops, deu algo errado ao atualizar o contato!`, {
+                icon: "error",
+            })
         })
     }else{
         $http.post(`${api}/contacts`, contact).then(data=>{
@@ -36,7 +40,7 @@ function initConfig($scope, $http){
             get_contacts();
             $scope.contact=null
         }).catch(erro=>{
-            swal(`Ops, deu algo errado ao excluir o contato!`, {
+            swal(`Ops, deu algo errado ao salvar o contato!`, {
                 icon: "error",
             })
         })
