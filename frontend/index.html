@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="pythonWeb">
 <head>
+  <title>Lista Telefonica</title>
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Import materialize.css-->
@@ -14,7 +15,8 @@
       <div class="col s12 m12">
         <div class="card-panel center-align">
           <div class="row">
-            <form class="col 12 offset-s1" >
+            <h4>Lista Telefônica</h4>
+            <form class="col 12 offset-s1">
               <div class="input-field col s6">
                 <i class="material-icons prefix">account_circle</i>
                 <input id="icon_prefix" ng-model="contact.name_person" type="text" class="validate" >
@@ -22,7 +24,7 @@
               </div>
               <div class="input-field col s6">
                 <i class="material-icons prefix">phone</i>
-                <input id="icon_telephone" type="tel" ng-model="contact.phone" maxlenght="9" class="validate phone">
+                <input id="icon_telephone" type="tel" ng-model="contact.phone" maxlenght="9" class="validate">
                 <label for="icon_telephone">Número de Telefone</label>
               </div>
               <button class="btn waves-effect waves-light" name="action" ng-click="contact=null">Limpar
