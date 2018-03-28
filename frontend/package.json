@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "angular": "^1.6.9",
+    "jquery": "^3.3.1",
+    "jquery-mask-plugin": "^1.14.15",
     "materialize-css": "^1.0.0-beta",
     "sweetalert": "^2.1.0"
   }
