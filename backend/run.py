@@ -14,10 +14,10 @@ def get_insert_persons():
     if request.method == 'POST':
         name_person=request.json.get('name_person')
         phone=request.json.get('phone')
-        json={
-            'name_person':name_person,
-            'phone':phone
-        }
+        json=dict(
+            name_person=name_person,
+            phone=phone
+        )
         contact.insert(json)
         return 'Contato Salvo com Sucesso', 200
     else:
@@ -25,11 +25,11 @@ def get_insert_persons():
         contact = mongo.db.contact
         get_contact = contact.find()
         for und in get_contact:
-            json={
-                '_id':str(und['_id']),
-                'name_person':und['name_person'],
-                'phone':und['phone']
-            }
+            json=dict(
+                _id=str(und['_id']), 
+                name_person=und['name_person'], 
+                phone=und['phone']
+            )
             value.append(json)
         return jsonify(value)
 
@@ -47,11 +47,11 @@ def del_get_contacts(_id):
         contact = mongo.db.contact
         get_contact = contact.find({'_id':_id})
         for und in get_contact:
-            json={
-                '_id':str(und['_id']),
-                'name_person':und['name_person'],
-                'phone':und['phone']
-            }
+            json=dict(
+                _id=str(und['_id']), 
+                name_person=und['name_person'], 
+                phone=und['phone']
+            )
             value.append(json)
         return jsonify(value)
     else:
