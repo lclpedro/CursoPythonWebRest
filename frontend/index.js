@@ -30,7 +30,6 @@ function initConfig($scope, $http){
         })
     }else{
         $http.post(`${api}/contacts`, contact).then(data=>{
-            console.log(data)
             swal({
               title: "Muito bem!",
               text: data.data,
