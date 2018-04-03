@@ -1,16 +1,16 @@
 from flask import Flask, jsonify, request, json
-from flask_pymongo import PyMongo
+from flask_pymongo import MongoClient
 from flask_cors import CORS
 from bson.objectid import ObjectId
 
-app = Flask(__name__)
+app = Flask('Python_Web_REST')
 CORS(app)
-mongo = PyMongo(app)
-MONGO_URI='mongodb://localhost:27017/admin'
+client = MongoClient('localhost', 27017)
+db = client.crud
 
 @app.route('/api/contacts', methods=['GET', 'POST'])
 def get_insert_persons():
-    contact = mongo.db.contact
+    contact = db.contact
     if request.method == 'POST':
         name_person=request.json.get('name_person')
         phone=request.json.get('phone')
@@ -22,7 +22,7 @@ def get_insert_persons():
         return 'Contato Salvo com Sucesso', 200
     else:
         value=[]
-        contact = mongo.db.contact
+        contact = db.contact
         get_contact = contact.find()
         for und in get_contact:
             json=dict(
@@ -35,7 +35,7 @@ def get_insert_persons():
 
 @app.route('/api/contact/<_id>', methods=['PUT', 'DELETE', 'GET'])
 def del_get_contacts(_id):
-    contact = mongo.db.contact
+    contact = db.contact
     _id=ObjectId(_id)
     if request.method == 'PUT':
         value = request.json
@@ -44,7 +44,7 @@ def del_get_contacts(_id):
         return 'Contato atualizado com sucesso!', 200
     elif request.method=='GET':
         value=[]
-        contact = mongo.db.contact
+        contact = db.contact
         get_contact = contact.find({'_id':_id})
         for und in get_contact:
             json=dict(
