@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request, json
 from flask_pymongo import MongoClient
 from flask_cors import CORS
 from bson.objectid import ObjectId
+import os
 
 #Configurações básicas da Aplicação
 #Inicialização do Flask passando um nome a aplicação
@@ -10,9 +11,26 @@ app = Flask('Python_Web_REST')
 #Lib para tratar de CORS, Cross-Origin-* 
 CORS(app)
 #Conector do Mongo passando as configurações do servidor Mongo
-client = MongoClient('localhost', 27017)
+#Config mongo Heroku
+client = MongoClient('mongodb://testeMongoHeroku:testeCurso@ds127731.mlab.com:27731/heroku_3s7snq93')
+# Config mongo Localhost
+# client = MongoClient('localhost', 27017) 
+
 #Definindo nome do Banco de dados que será utilizado
-db = client.crud
+db = client.heroku_3s7snq93
+
+#Inserir um Novo Contato
+@app.route('/api/contacts', methods=['POST'])
+def insert_contact():
+    contact = db.contact
+    name_person=request.json.get('name_person')
+    phone=request.json.get('phone')
+    json=dict(
+        name_person=name_person,
+        phone=phone
+    )
+    contact.insert(json)
+    return 'Contato Salvo com Sucesso', 200
 
 # Listagem de todos os contatos
 @app.route('/api/contacts', methods=['GET'])
@@ -29,26 +47,12 @@ def get_contact():
         value.append(json)
     return jsonify(value)
 
-#Inserir um Novo Contato
-@app.route('/api/contacts', methods=['POST'])
-def insert_contact():
-    contact = db.contact
-    name_person=request.json.get('name_person')
-    phone=request.json.get('phone')
-    json=dict(
-        name_person=name_person,
-        phone=phone
-    )
-    contact.insert(json)
-    return 'Contato Salvo com Sucesso', 200
-
 #Listar Apenas um Contato Sendo identificado pelo ID.
 @app.route('/api/contact/<_id>', methods=['GET'])
 def get_one_contact(_id):
     contact = db.contact
     _id=ObjectId(_id)
     value=[]
-    contact = db.contact
     get_contact = contact.find({'_id':_id})
     for und in get_contact:
         json=dict(
@@ -133,4 +137,5 @@ def delete_contact(_id):
     #debug=True autoreload (em faze de desenvolvimento)
     #threaded=True Utilização de multiThreads fluidez na aplicação
 if __name__ == "__main__":
-    app.run(debug=True, threaded=True)
+    port = int(os.getenv('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True, threaded=True)

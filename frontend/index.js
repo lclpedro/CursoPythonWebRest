@@ -1,6 +1,6 @@
 function initConfig($scope, $http){
     console.log('Carregamento OK!')
-    let api = 'http://localhost:5000/api'
+    let api = 'https://curso-python-web-rest.herokuapp.com/api'
     let get_contacts = ()=>{
         $http.get(`${api}/contacts`).then(data=>{
             $scope.list_contacts=data.data

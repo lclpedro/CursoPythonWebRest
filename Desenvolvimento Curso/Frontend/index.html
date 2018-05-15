@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="pythonWeb">
+<head>
+    <title>Lista Telefonica</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body ng-controller="initConfigController">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12">
+                <div class="card-panel center-align">
+                    <div class="row">
+                        <h4>Lista Telefônica</h4>
+                        <form class="col 12 offset-s1" name="form_cadastro">
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="icon_prefix" ng-model="contact.name_person" type="text" class="validate" placeholder="Ellon Musk" ng-required="true">
+                                <label for="icon_prefix">Nome do Contato</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">phone</i>
+                                <input id="icon_telephone" type="tel" ng-model="contact.phone" class="validate phone" placeholder="(XX) X XXXX-XXXX" ng-required="true">
+                                <label for="icon_telephone">Número de Telefone</label>
+                            </div>
+                            <button class="btn waves-effect waves-light" name="action" ng-click="contact=null">Limpar
+                                <i class="material-icons right">close</i>
+                            </button>
+                            <button class="btn waves-effect waves-light" name="action" ng-click="insert_contact(contact)" ng-disabled="form_cadastro.$invalid">Salvar
+                                <i class="material-icons right">check</i>
+                            </button>
+                        </form>
+                        <div class="col s12">
+                            <h5 ng-show="list_contacts.length == 0">Ainda não existem contatos cadastrados.</h5>
+                            <table ng-hide="list_contacts.length == 0">
+                                <thead>
+                                    <tr>
+                                        <th class="center-align">Nome</th>
+                                        <th class="center-align">Telefone</th>
+                                        <th class="center-align">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="und in list_contacts">
+                                        <td class="center-align">{{und.name_person}}</td>
+                                        <td class="center-align">{{und.phone}}</td>
+                                        <td class="center-align">
+                                            <button class="btn waves-effect waves-light" name="action" ng-click="edit_contact(und)">Editar
+                                                <i class="material-icons right">edit</i>
+                                            </button>
+                                            <button class="btn waves-effect waves-light" name="action" ng-click="delete_contact(und)">Deletar
+                                                <i class="material-icons right">delete</i>
+                                            </button>
+                                        </td>
+                                    </tr>        
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="node_modules/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.phone').mask('(00) 9 0000 - 0000');
+        })
+    </script>
+</body>
+</html>
